@@ -2,27 +2,23 @@ import base64
 import io
 import json
 import uuid
+import os
 from datetime import datetime
 from flask import Flask, render_template, request, jsonify
 import face_recognition
 import numpy as np
 from PIL import Image
+from pymongo import MongoClient
 
 app = Flask(__name__)
 
-USERS_DB = "users.json"
+# Get MongoDB URI from environment variable
+MONGO_URI = os.getenv("MONGO_URI")
 
-def load_users():
-    try:
-        with open(USERS_DB, "r") as f:
-            users = json.load(f)
-            return users if isinstance(users, list) else []
-    except (FileNotFoundError, json.JSONDecodeError):
-        return []
-
-def save_users(users):
-    with open(USERS_DB, "w") as f:
-        json.dump(users, f, indent=2)
+# Connect to MongoDB
+client = MongoClient(MONGO_URI)
+db = client["newsque"]
+collection = db["users"]
 
 def validate_user_data(data):
     required_fields = ["name", "age", "gender", "number", "address", "state", "city", "country", "postal", "college", "branch", "image"]
@@ -78,9 +74,7 @@ def register_user():
 
         avg_encoding = np.mean(encodings, axis=0)
 
-        users = load_users()
-
-        users.append({
+        user_data = {
             "id": str(uuid.uuid4()),
             "name": data["name"],
             "age": data["age"],
@@ -97,9 +91,9 @@ def register_user():
             },
             "encoding": avg_encoding.tolist(),
             "registered_at": datetime.utcnow().isoformat()
-        })
+        }
 
-        save_users(users)
+        collection.insert_one(user_data)
 
         return jsonify({"status": "success", "message": "User registered"})
 
@@ -126,7 +120,7 @@ def recognize_face():
 
         unknown_encoding = unknown_encodings[0]
 
-        users = load_users()
+        users = list(collection.find())
 
         best_match = None
         lowest_distance = float("inf")
