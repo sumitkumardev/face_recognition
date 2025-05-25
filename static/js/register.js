@@ -7,10 +7,18 @@ const snapBtn = document.getElementById('snap');
 const submitBtn = document.getElementById('submit');
 
 // Access webcam
+// navigator.mediaDevices.getUserMedia({ video: true })
+//     .then(stream => { video.srcObject = stream; })
+//     .catch(err => alert('Error accessing webcam: ' + err));
 navigator.mediaDevices.getUserMedia({ video: true })
-    .then(stream => { video.srcObject = stream; })
-    .catch(err => alert('Error accessing webcam: ' + err));
-
+  .then(stream => {
+    video.srcObject = stream;
+    video.play();
+  })
+  .catch(error => {
+    console.error("Error accessing webcam:", error);
+  });
+  
 snapBtn.onclick = () => {
     const context = canvas.getContext('2d');
     context.drawImage(video, 0, 0, canvas.width, canvas.height);

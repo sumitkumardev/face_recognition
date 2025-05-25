@@ -3,9 +3,17 @@ const canvas = document.getElementById("canvas");
 const snapBtn = document.getElementById("snap");
 const resultP = document.getElementById("result");
 
+// navigator.mediaDevices.getUserMedia({ video: true })
+//     .then(stream => video.srcObject = stream)
+//     .catch(e => alert("Error accessing webcam"));
 navigator.mediaDevices.getUserMedia({ video: true })
-    .then(stream => video.srcObject = stream)
-    .catch(e => alert("Error accessing webcam"));
+  .then(stream => {
+    video.srcObject = stream;
+    video.play();
+  })
+  .catch(error => {
+    console.error("Error accessing webcam:", error);
+  });
 
 snapBtn.onclick = () => {
     const context = canvas.getContext("2d");
