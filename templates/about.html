@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+    <main>
+        <header>
+            <div class="headMain">
+                <div class="left">
+                    <h1>Face Recognition</h1>
+                </div>
+                <div class="right">
+                    <p>About</p>
+                </div>
+            </div>
+        </header>
+        <div class="inner">
+            <div class="inner-body">
+                <div class="inner_left">
+                    <!-- <div class="contents"> -->
+                    <h1>About Face Recognition</h1>
+                    <p>Captures webcam image, collects student data, and stores it securely using face recognition and
+                        MongoDB.</p>
+                <!-- </div> -->
+
+            </div>
+            <div class="inner_right">
+                <img src="{{ url_for('static', filename='images/face.svg') }}">
+            </div>
+        </div>
+
+
+        </div>
+        <!-- <footer>
+            <p>Face Recognition System</p>
+        </footer> -->
+    </main>
+
+</body>
+
+</html>

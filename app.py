@@ -21,7 +21,7 @@ db = client["newsque"]
 collection = db["users"]
 
 def validate_user_data(data):
-    required_fields = ["name", "age", "gender", "number", "address", "state", "city", "country", "postal", "college", "branch", "image"]
+    required_fields = ["name", "age", "gender", "number", "address", "state", "city", "email", "postal", "college", "branch", "image"]
     for field in required_fields:
         if not data.get(field):
             return f"Missing field: {field}"
@@ -43,6 +43,10 @@ def decode_base64_image(image_data):
 @app.route("/")
 def home():
     return render_template("index.html")
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
 
 @app.route("/register")
 def register():
@@ -74,7 +78,9 @@ def register_user():
 
         avg_encoding = np.mean(encodings, axis=0)
 
-        user_data = {
+        users = load_users()
+
+        users.append({
             "id": str(uuid.uuid4()),
             "name": data["name"],
             "age": data["age"],
@@ -83,7 +89,7 @@ def register_user():
             "address": data["address"],
             "state": data["state"],
             "city": data["city"],
-            "country": data["country"],
+            "email": data["email"],
             "postal": data["postal"],
             "college": {
                 "name": data["college"],
@@ -91,9 +97,9 @@ def register_user():
             },
             "encoding": avg_encoding.tolist(),
             "registered_at": datetime.utcnow().isoformat()
-        }
+        })
 
-        collection.insert_one(user_data)
+        save_users(users)
 
         return jsonify({"status": "success", "message": "User registered"})
 
@@ -120,7 +126,7 @@ def recognize_face():
 
         unknown_encoding = unknown_encodings[0]
 
-        users = list(collection.find())
+        users = load_users()
 
         best_match = None
         lowest_distance = float("inf")
@@ -142,7 +148,7 @@ def recognize_face():
                 "address": best_match["address"],
                 "state": best_match["state"],
                 "city": best_match["city"],
-                "country": best_match["country"],
+                "email": best_match["email"],
                 "postal": best_match["postal"],
                 "college": best_match["college"]
             })

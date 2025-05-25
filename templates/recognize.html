@@ -24,15 +24,17 @@
         <div class="inner">
             <h2>Scan Your Face</h2>
             <div class="inner-body">
-                <video id="video" width="480" height="360" autoplay></video><br>
-                <!-- <button id="snap">Scan Face</button><br><br> -->
-                <div class="verify_submit">
+                <div class="vinner">
+                    <video id="video" width="480" height="360" autoplay></video>
                     <button class="button" id="snap">
                         <div class="back"></div>
                         <span class="text">Scan Face</span>
                     </button>
+                </div>
+                <!-- <button id="snap">Scan Face</button><br><br> -->
+                <div class="verify_submit">
                     <canvas id="canvas" width="480" height="360" style="display:none;"></canvas>
-                    <p id="result"></p>
+                    <div id="result"></div>
                 </div>
             </div>
         </div>

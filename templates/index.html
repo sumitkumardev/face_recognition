@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Face Recognition App</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Face Recognition App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
 </head>
+
 <body>
     <main>
         <header>
@@ -15,14 +17,27 @@
                     <h1>Face Recognition</h1>
                 </div>
                 <div class="right">
-                    <p>About</p>
+                    <a href="/about">About</a>
                 </div>
             </div>
         </header>
-        <div class="inner-body">
-  <h1>Welcome to Face Recognition App</h1>
-  <a href="/register">Register New Student</a>
-  <a href="/recognize">Recognize Face</a>
+        <div class="inner">
+            <div class="inner-body">
+                <div class="inner_left">
+                    <!-- <div class="contents"> -->
+                    <h1>Face Recognition</h1>
+                    <p>Captures webcam image, collects student data, and stores it securely using face recognition and
+                        MongoDB.</p>
+                <!-- </div> -->
+                <a class="btn" href="/register">Register Student</a>
+                <a class="btn bg" href="/recognize">Recognize Face</a>
+            </div>
+            <div class="inner_right">
+                <img class="Ibg" src="{{ url_for('static', filename='images/face.svg') }}">
+            </div>
+        </div>
+
+
         </div>
         <!-- <footer>
             <p>Face Recognition System</p>
@@ -30,4 +45,5 @@
     </main>
 
 </body>
+
 </html>
