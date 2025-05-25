@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register User</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+  <main>
+    <header>
+      <div class="headMain">
+        <div class="left">
+          <h1>Face Recognition</h1>
+        </div>
+        <div class="right">
+          <p>About</p>
+        </div>
+      </div>
+    </header>
+    <div class="inner">
+      <h2>Register New Student</h2>
+      <div class="inner-body">
+      <div class="inner_left">
+        <form id="registerForm">
+          <div class="form"><label>Name: </label><input type="text" id="name" /></div>
+          <!-- <label>Age: <input type="number" id="age" /></label> -->
+          <div class="form"><label>Date of Birth:</label><input type="date" id="age" name="dob" required></div>
+          <div class="form"><label>Phone:</label><input type="tel" name="phone" id="number" pattern="[0-9]{10}" />
+          </div>
+          <div class="form"><label>Gender: </label><select id="gender" name="gender" required>
+              <option value="">Select</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select></div>
+          <!-- <label>Address: <textarea id="address" name="address" rows="3" required></textarea><br></label> -->
+          <!-- Address starts here -->
+          <div>
+            <label for="country">Country or region</label>
+            <select id="country" name="country" autocomplete="country" required>
+              <option value="">Select a country</option>
+            </select>
+          </div>
+          <div>
+            <label for="state">State</label>
+            <select id="state" name="state" autocomplete="address-level1" required>
+              <option value="">Select a state</option>
+            </select>
+          </div>
+          <div>
+            <label for="city">City: </label>
+            <input required type="text" id="city" name="city" autocomplete="address-level2" enterkeyhint="next">
+          </div>
+          <div>
+            <label for="postal-code">Pin Code:</label>
+            <input class="postal-code" id="postal-code" name="postal-code" autocomplete="postal-code"
+              enterkeyhint="next">
+          </div>
+          <div>
+            <label for="street-address">Address: </label>
+            <input type="text" id="address" name="street-address" autocomplete="street-address" required
+              enterkeyhint="next"></input>
+
+          </div>
+          <!-- user information -->
+          <div class="form">
+            <label for="college">Select College:</label>
+            <select id="college" name="college" required>
+              <option value="">Select College</option>
+            </select>
+          </div>
+          <div class="form">
+            <label for="branch">Select Branch:</label>
+            <select id="branch" name="branch" required>
+              <option value="">Select Branch</option>
+            </select>
+          </div>
+
+
+        </form>
+      </div>
+      <div class="inner_right">
+        <div class="verify">
+          <video id="video" width="480" height="360" autoplay></video>
+          <button class="button" id="snap">
+            <div class="back"></div>
+            <span class="text">Take Picture</span>
+          </button>
+        </div>
+        <canvas id="canvas" width="480" height="360" style="display:none;"></canvas>
+        <div class="verify_submit">
+          <img id="photo" src="" alt="Captured photo will appear here" />
+          <button class="button" id="submit">
+            <div class="back"></div>
+            <span class="text">Submit Registration</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!-- <footer>
+      <p>Face Recognition System</p>
+    </footer> -->
+  </main>
+  <script src="/static/js/register.js"></script>
+</body>
+
+</html>

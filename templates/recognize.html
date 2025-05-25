@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Face Recognition App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+    <main>
+        <header>
+            <div class="headMain">
+                <div class="left">
+                    <h1>Face Recognition</h1>
+                </div>
+                <div class="right">
+                    <p>About</p>
+                </div>
+            </div>
+        </header>
+        <div class="inner">
+            <h2>Scan Your Face</h2>
+            <div class="inner-body">
+                <video id="video" width="480" height="360" autoplay></video><br>
+                <!-- <button id="snap">Scan Face</button><br><br> -->
+                <div class="verify_submit">
+                    <button class="button" id="snap">
+                        <div class="back"></div>
+                        <span class="text">Scan Face</span>
+                    </button>
+                    <canvas id="canvas" width="480" height="360" style="display:none;"></canvas>
+                    <p id="result"></p>
+                </div>
+            </div>
+        </div>
+        <!-- <footer>
+            <p>Face Recognition System</p>
+        </footer> -->
+    </main>
+    <script src="/static/js/recognize.js"></script>
+</body>
+
+</html>
