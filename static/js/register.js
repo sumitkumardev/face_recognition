@@ -10,14 +10,36 @@ const submitBtn = document.getElementById('submit');
 // navigator.mediaDevices.getUserMedia({ video: true })
 //     .then(stream => { video.srcObject = stream; })
 //     .catch(err => alert('Error accessing webcam: ' + err));
-navigator.mediaDevices.getUserMedia({ video: true })
-  .then(stream => {
-    video.srcObject = stream;
-    video.play();
-  })
-  .catch(error => {
-    console.error("Error accessing webcam:", error);
-  });
+// v1
+// navigator.mediaDevices.getUserMedia({ video: true })
+//   .then(stream => {
+//     video.srcObject = stream;
+//     video.play();
+//   })
+//   .catch(error => {
+//     console.error("Error accessing webcam:", error);
+//   });
+
+// v2
+navigator.mediaDevices.getUserMedia({
+  video: {
+    facingMode: { ideal: "environment" },  // or { exact: "environment" } for a hard requirement
+    width:  { ideal: 1280 },
+    height: { ideal: 720 }
+  },
+  audio: false
+})
+.then(stream => {
+  video.srcObject = stream;
+  video.setAttribute("playsinline", "");
+  video.muted = true;
+  return video.play();
+})
+.catch(err => {
+  console.error("Camera error:", err);
+  // fallback or user feedback…
+});
+
 
 snapBtn.onclick = () => {
     const context = canvas.getContext('2d');
