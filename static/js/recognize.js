@@ -82,6 +82,7 @@ snapBtn.onclick = () => {
         .then(data => {
             if (data.status === "success") {
                 resultP.innerHTML = `
+                <div class="pd"><h2>Verified</h2><img class="svg" src="static/images/verified-check.svg" alt="Verified"></div>
                 <table> <caption>Personal details</caption>
                     <tr class="name"><td>Full Name:</td><td><strong>${data.name}</strong></td></tr>
                     <tr class="age"><td>Age: </td><td>${data.age}</td></tr>
